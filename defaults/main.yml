@@ -1,0 +1,72 @@
+---
+### REVIEW ALL THE FILE PATHS TO ENSURE COMPATABILITY WITH YOUR SYSTEMS
+
+# HS/cache default install file temp directory on target
+common_install_base_path: /tmp/cacheinstall
+
+# Path to distribution fies on local server
+# YOU WILL HAVE TO CHANGE THIS FOR YOUR SET UP
+common_path_to_distribution_files: distribution
+common_path_to_distribution_files_Cache: "{{ common_path_to_distribution_files }}/cache"
+
+# HS default groups
+hs_cache_group: bin
+hs_cachemgr_group: bin
+
+# HS default users
+hs_cache_usr: root
+hs_cache_usr_sys: root
+
+# HS default install temp file upack directory
+hs_install_unpack_path: unpack
+
+
+# HealthShare/Cache install files.
+# - - - - - - - - - - - - - -
+# NOTE: The scripts in this example work with Caché, HealthShare AP or Ensemble
+# Caché distribution file and cache.key must exist on the controller server in:
+#    {{ common_path_to_distribution_files_Cache }}
+# Change the distribution file to match the the file you will use.
+
+hs_distribution_file: cache-2016.2.0.645.0-lnxsusex64
+
+# Destination file paths
+hs_parameterfile_location_hs2015: "{{ common_install_base_path }}/unpack/{{ hs_distribution_file }}/package/installFromParametersFile"
+hs_parameterfile_name: parameters_cache20162_sles64.isc
+
+ISC_PACKAGE_INSTANCENAME: CACHE
+ISC_PACKAGE_INSTALLDIR: /usr/cachesys
+ISC_PACKAGE_CSPDIR: /usr/cachesys/cspgateway
+ISC_PACKAGE_UNICODE: N
+ISC_PACKAGE_INITIAL_SECURITY: "Locked Down"
+ISC_PACKAGE_MGRUSER: "{{ hs_cache_usr_sys }}"
+ISC_PACKAGE_MGRGROUP: "{{ hs_cachemgr_group }}"
+ISC_PACKAGE_USER_PASSWORD: SYS
+ISC_PACKAGE_CACHEUSER: "{{ hs_cache_usr }}"
+ISC_PACKAGE_CACHEGROUP: "{{ hs_cache_group }}"
+ISC_PACKAGE_SUPERSERVER_PORT: 1972
+ISC_PACKAGE_WEBSERVER_PORT: 8972
+ISC_PACKAGE_JDBCGATEWAY_PORT: 62972
+ISC_PACKAGE_SMP_CSP_PASSWORD: SYS
+ISC_PACKAGE_CSP_CONFIGURE: Y
+ISC_PACKAGE_CSP_SERVERTYPE: None
+ISC_PACKAGE_CLIENT_COMPONENTS:
+ISC_CSP_GATEWAY_DIR: /usr/cachesys/cspgateway
+
+# Set defaults for cache.cpf file
+
+hs_percent_shared_memory: 75  # Percentage (0-100) of total RAM to dedicate to huge pages
+
+# Default values - These will be application specific  - These will be used in Part 2 ofthe blog post
+hs_tc_routine_buffers: 512
+hs_locksize: 64000000
+hs_gmheap: 256000
+
+# Global buffers is memory allocated for huge pages - all hs/Cache shared memory
+
+# Approx how much memory for hs shared memory - Global and routine buffers gmheap, etc
+# Ballpark - can hard code global buffers etc.
+
+##  Leave a buffer for other structures and rounding errors.
+
+hs_shared_memory_available_for_hs: "{{ (((hs_percent_shared_memory/100) * ansible_memtotal_mb) * (hs_percent_shared_memory_hs/100) )|round|int }}"

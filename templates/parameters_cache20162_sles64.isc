@@ -1,0 +1,90 @@
+
+dist.source_dir: {{ common_install_base_path }}/{{ hs_install_unpack_path }}/{{ hs_distribution_file  }}
+legacy_dist.source_dir: {{ common_install_base_path }}/{{ hs_install_unpack_path }}/{{ hs_distribution_file }}
+product_info.version: 2016.2.0.645
+product_info.name: Cache
+product_info.displayed_name: Cache
+platform_selection.platform: lnxsuse64
+platform_selection.platform_family: lnxsusex64
+platform_selection.endianness: little
+platform_selection.os: Linux
+posix_tools.user_add: /usr/sbin/useradd
+posix_tools.group_add: /usr/sbin/groupadd
+posix_tools.mk_user:
+posix_tools.mk_group:
+posix_tools.grep: grep
+posix_tools.id: id
+posix_tools.ps_opt: -ef
+posix_tools.gzip: gzip
+posix_tools.shared_ext: so
+posix_tools.symbolic_copy: cp -Rfp
+posix_tools.tr: tr
+posix_tools.shared_ext1: so
+posix_tools.permission: 755
+posix_tools.dir_permission: 775
+server_location.target_dir: {{ ISC_PACKAGE_INSTALLDIR }}
+server_location.is_server_install: Y
+server_location.is_nonroot_install: N
+server_location.instance_name: {{ ISC_PACKAGE_INSTANCENAME }}
+server_location.is_new_install: Y
+server_location.is_new_directory:
+server_location.registry_dir: /usr/local/etc/cachesys
+server_location.convert_ensemble_registry:
+server_location.ccontrol: {{ common_install_base_path }}/{{ hs_install_unpack_path }}/ {{ hs_distribution_file }}/dist/lnxsusex64/bin/shared/ccontrol
+install_mode.setup_type: Custom
+unicode_selection.binary_type: eightbit
+unicode_selection.install_unicode: N
+security_settings.cache_user: {{ hs_cache_usr }}
+security_settings.cache_group: {{ hs_cache_usr }}
+security_settings.manager_user: {{ hs_cache_usr_sys }}
+security_settings.manager_group: {{ hs_cachemgr_group }}
+security_settings.dbencrypted: 0
+security_settings.dbenckeyfile:
+security_settings.dbenckeyuser:
+security_settings.personal_database:
+security_settings.initial_level: Locked Down
+security_settings.already_secured: N
+security_settings.password: {{ ISC_PACKAGE_SMP_CSP_PASSWORD }}
+security_settings.csppassword: {{ ISC_PACKAGE_SMP_CSP_PASSWORD }}
+security_settings.dbenckeypassword: {{ ISC_PACKAGE_SMP_CSP_PASSWORD }}
+installer.manifest:
+installer.manifest_parameters: SourceDir={{ common_install_base_path }}/{{ hs_install_unpack_path }},ISCUpgrade=0,
+manager_source_code.available: N
+port_selection.superserver_port: {{ ISC_PACKAGE_SUPERSERVER_PORT }}
+port_selection.webserver_port: {{ ISC_PACKAGE_WEBSERVER_PORT }}
+port_selection.jdbcgateway_port: {{ ISC_PACKAGE_JDBCGATEWAY_PORT }}
+csp_gateway.configure: Y
+csp_gateway.configure_apache: N
+csp_gateway.web_server_type: None
+csp_gateway.apache_version:
+csp_gateway.apache_executable:
+csp_gateway.apache_user:
+csp_gateway.apache_conf_file:
+csp_gateway.apache_pid_file:
+csp_gateway.apache_use32bit: N
+csp_gateway.sunone_server:
+csp_gateway.directory: {{ ISC_PACKAGE_CSPDIR }}
+csp_gateway.selinuxaware: N
+license_key.enter_key:
+license_key.license_file:
+agent.user_account: iscagent
+agent.user_group: iscagent
+agent.install: Y
+client_location.target_dir: {{ ISC_PACKAGE_INSTALLDIR }}
+client_location.is_client_install: N
+install: database_server
+postinstall: database_server
+install: samples
+samples.install: N
+japanese_docs.install: N
+install: docbook
+docbook.install: Y
+install: dev_kit
+install: fop
+install: renderserver
+install: printserver
+install: excelexporter
+install: addenda
+install: copyright
+installer.manifest_loglevel: 1
+installer.manifest_logfile: 

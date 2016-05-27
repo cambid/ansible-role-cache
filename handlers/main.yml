@@ -1,0 +1,3 @@
+---
+- name: restart Cache
+  command: ccontrol stop "{{ ISC_PACKAGE_INSTANCENAME }}" restart quietly
