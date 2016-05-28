@@ -8,8 +8,11 @@ galaxy_info:
   min_ansible_version: 1.2
 
   platforms:
-  - name: Suse
+  - name: SLES
     versions:
+    - 11
+    - 11SP1
+    - 11SP2
     - 11SP3
     - 11SP4
 
@@ -17,3 +20,4 @@ galaxy_info:
     - intersystems
     - database
     - cache
+dependencies: []
