@@ -24,17 +24,13 @@
         mode=0777
         state=directory
 
-- name: Copy Caché install file
-  copy: src={{ common_path_to_distribution_files_Cache }}/{{ hs_distribution_file }}.tar.gz
-        dest={{ common_install_base_path }}/{{ hs_distribution_file }}.tar.gz
-        force=no
-
-# uncompress and untar
-- name: unpack Caché folder
-  command: tar -xvf {{ common_install_base_path }}/{{ hs_distribution_file }}.tar.gz
-  args:
-   chdir: "{{ common_install_base_path }}/{{ hs_install_unpack_path }}"
-   creates: "{{ common_install_base_path }}/{{ hs_install_unpack_path }}/{{ hs_distribution_file }}/cinstall"
+- name: Unarchive install file
+  unarchive:
+    src={{ common_path_to_distribution_files_Cache }}/{{ hs_distribution_file }}.tar.gz
+    dest={{ common_install_base_path }}/{{ hs_install_unpack_path }}
+    copy=yes
+    mode=0777
+    creates="{{ common_install_base_path }}/{{ hs_install_unpack_path }}/{{ hs_distribution_file }}/cinstall"
 
 # Install Caché
 
