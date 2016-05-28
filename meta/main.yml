@@ -1,6 +1,6 @@
 galaxy_info:
   author: Jan Fader
-  description: unattended installation of cache. tested with FT 2016.2
+  description: unattended installation of Intersystems Cache
   company: bpm consult ag
 
   license: GPLv3
@@ -8,12 +8,12 @@ galaxy_info:
   min_ansible_version: 1.2
 
   platforms:
-  - name: SLES
+  - name: Suse
     versions:
     - 11SP3
     - 11SP4
 
   galaxy_tags:
-    intersystems
-    database
-    cache
+    - intersystems
+    - database
+    - cache
