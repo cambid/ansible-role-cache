@@ -82,5 +82,11 @@
   copy: src="{{ common_path_to_distribution_files_Cache }}/cache.key" dest="{{ ISC_PACKAGE_INSTALLDIR }}/mgr"
   notify: restart Cache
 
-- name: Set default hs instance
+- name: check default cache instance
+  command: "ccontrol default"
+  register: default_cache_instance
+  changed_when: false
+
+- name: Set default cache instance
   command: "ccontrol default {{ ISC_PACKAGE_INSTANCENAME }}"
+  when: default_cache_instance.stdout != "{{ ISC_PACKAGE_INSTANCENAME }}"
