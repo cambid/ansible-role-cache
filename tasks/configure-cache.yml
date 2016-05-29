@@ -79,7 +79,7 @@
 # Copy key now. Note cache is not started until after tasks finished
 
 - name: copy hs key
-  copy: src="{{ common_path_to_distribution_files_Cache }}/cache.key" dest="{{ ISC_PACKAGE_INSTALLDIR }}/mgr"
+  copy: src="{{ common_path_to_distribution_files_Cache }}/{{ cache_key_file }}" dest="{{ ISC_PACKAGE_INSTALLDIR }}/mgr"
   notify: restart Cache
 
 - name: check default cache instance

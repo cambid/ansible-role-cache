@@ -8,6 +8,7 @@ common_install_base_path: /tmp/cacheinstall
 # YOU WILL HAVE TO CHANGE THIS FOR YOUR SET UP
 common_path_to_distribution_files: distribution
 common_path_to_distribution_files_Cache: "{{ common_path_to_distribution_files }}/cache"
+cache_key_file: cache.key
 
 # HS default groups
 hs_cache_group: bin
