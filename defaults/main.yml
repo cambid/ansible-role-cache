@@ -29,11 +29,11 @@ hs_install_unpack_path: unpack
 #    {{ common_path_to_distribution_files_Cache }}
 # Change the distribution file to match the the file you will use.
 
-hs_distribution_file: cache-2016.2.0.645.0-lnxsusex64
+hs_distribution_file: "cache-{{ hs_distribution_version }}-lnx{{ hs_distribution_name }}x64"
 
 # Destination file paths
 hs_parameterfile_location_hs2015: "{{ common_install_base_path }}/unpack/{{ hs_distribution_file }}/package/installFromParametersFile"
-hs_parameterfile_name: parameters_cache20162_sles64.isc
+hs_parameterfile_name: parameters_cache20162.isc
 
 ISC_PACKAGE_INSTANCENAME: CACHE
 ISC_PACKAGE_INSTALLDIR: /usr/cachesys

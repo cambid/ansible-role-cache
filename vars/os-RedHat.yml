@@ -1,6 +1,7 @@
 ---
-  hs_distribution_name: suse
-  when: ansible_os_family == 'Suse'
+
+  hs_distribution_name: rh
+  when: ansible_os_family == 'RedHat'
 
 # operating System setup - this will be application specific.
 

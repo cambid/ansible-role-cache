@@ -1,8 +1,8 @@
 ---
-- include_vars: os-Suse.yml
-  when: ansible_os_family == 'Suse'
+- include_vars: os-{{ ansible_os_family  }}.yml
+  when: ansible_os_family == 'Suse' or ansible_os_family == 'RedHat'
 
-- include: setup-Suse.yml
-  when: ansible_os_family == 'Suse'
+- include: setup-{{ ansible_os_family }}.yml
+  when: ansible_os_family == 'Suse' or ansible_os_family == 'RedHat'
 
 - include: configure-cache.yml
