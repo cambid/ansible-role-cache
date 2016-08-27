@@ -26,14 +26,19 @@ server_location.target_dir: {{ ISC_PACKAGE_INSTALLDIR }}
 server_location.is_server_install: Y
 server_location.is_nonroot_install: N
 server_location.instance_name: {{ ISC_PACKAGE_INSTANCENAME }}
+{% if ISC_UPGRADE  == 1 %}
+server_location.is_new_install: N
+server_location.is_new_directory: N
+{% else %}
 server_location.is_new_install: Y
-server_location.is_new_directory:
+server_location.is_new_directory: Y
+{% endif %}
 server_location.registry_dir: /usr/local/etc/cachesys
 server_location.convert_ensemble_registry:
 server_location.ccontrol: {{ common_install_base_path }}/{{ hs_install_unpack_path }}/ {{ hs_distribution_file }}/dist/lnx{{ hs_distribution_name }}x64/bin/shared/ccontrol
 install_mode.setup_type: Custom
-unicode_selection.binary_type: eightbit
-unicode_selection.install_unicode: N
+unicode_selection.binary_type: {{ ISC_BINARY_TYPE }}
+unicode_selection.install_unicode: {{ ISC_PACKAGE_UNICODE }}
 security_settings.cache_user: {{ hs_cache_usr }}
 security_settings.cache_group: {{ hs_cache_usr }}
 security_settings.manager_user: {{ hs_cache_usr_sys }}
@@ -48,8 +53,8 @@ security_settings.password: {{ ISC_PACKAGE_SMP_CSP_PASSWORD }}
 security_settings.csppassword: {{ ISC_PACKAGE_SMP_CSP_PASSWORD }}
 security_settings.dbenckeypassword: {{ ISC_PACKAGE_SMP_CSP_PASSWORD }}
 installer.manifest:
-installer.manifest_parameters: SourceDir={{ common_install_base_path }}/{{ hs_install_unpack_path }},ISCUpgrade=0,
-manager_source_code.available: N
+installer.manifest_parameters: SourceDir={{ common_install_base_path }}/{{ hs_install_unpack_path }},ISCUpgrade={{ ISC_UPGRADE }},
+manager_source_code.available: {{ ISC_MANAGER_SOURCECODE }}
 port_selection.superserver_port: {{ ISC_PACKAGE_SUPERSERVER_PORT }}
 port_selection.webserver_port: {{ ISC_PACKAGE_WEBSERVER_PORT }}
 port_selection.jdbcgateway_port: {{ ISC_PACKAGE_JDBCGATEWAY_PORT }}
