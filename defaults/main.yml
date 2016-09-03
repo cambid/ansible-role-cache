@@ -21,7 +21,6 @@ hs_cache_usr_sys: root
 # HS default install temp file upack directory
 hs_install_unpack_path: unpack
 
-
 # HealthShare/Cache install files.
 # - - - - - - - - - - - - - -
 # NOTE: The scripts in this example work with Caché, HealthShare AP or Ensemble
@@ -74,3 +73,6 @@ hs_gmheap: 256000
 ##  Leave a buffer for other structures and rounding errors.
 
 hs_shared_memory_available_for_hs: "{{ (((hs_percent_shared_memory/100) * ansible_memtotal_mb) * (hs_percent_shared_memory_hs/100) )|round|int }}"
+
+# path for multiple configuration file
+path_to_tmp_files: tmp
