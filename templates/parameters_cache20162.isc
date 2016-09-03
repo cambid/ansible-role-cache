@@ -40,7 +40,7 @@ install_mode.setup_type: Custom
 unicode_selection.binary_type: {{ ISC_BINARY_TYPE }}
 unicode_selection.install_unicode: {{ ISC_PACKAGE_UNICODE }}
 security_settings.cache_user: {{ hs_cache_usr }}
-security_settings.cache_group: {{ hs_cache_usr }}
+security_settings.cache_group: {{ hs_cache_group }}
 security_settings.manager_user: {{ hs_cache_usr_sys }}
 security_settings.manager_group: {{ hs_cachemgr_group }}
 security_settings.dbencrypted: 0

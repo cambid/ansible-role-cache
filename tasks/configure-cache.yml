@@ -12,7 +12,7 @@
 
 - name: Create default cache system users
   user: name={{ hs_cache_usr_sys }} comment="cache system usr" group={{ hs_cachemgr_group }}
-  when: hs_cache_usr != 'root'
+  when: hs_cache_usr_sys != 'root'
 
 - name: Create full Caché install temp directory
   file: path={{ common_install_base_path }}/{{ hs_install_unpack_path }}
@@ -81,6 +81,14 @@
   command: "ccontrol default {{ ISC_PACKAGE_INSTANCENAME }}"
   when: default_cache_instance.stdout != "{{ ISC_PACKAGE_INSTANCENAME }}"
 
+- name: get file stats of local csp.conf
+  delegate_to: localhost
+  stat:
+    path: "{{ path_to_tmp_files  }}/csp.conf"
+  register: cspconf
+  ignore_errors: True
+  become: false
+
 - name: copy apache configuration for csp-gateway
   copy:
     src="{{ path_to_tmp_files }}/csp.conf"
@@ -88,8 +96,17 @@
     mode=644
     owner=root
     group=root
+  when: cspconf.stat.exists
   notify: restart apache2
   tags: configuration
+
+- name: get file stats of local CSP.ini
+  delegate_to: localhost
+  stat:
+    path="{{ path_to_tmp_files }}/CSP.ini"
+  register: cspini
+  ignore_errors: True
+  become: false
 
 - name: copy CSP.ini to path
   copy:
@@ -98,5 +115,6 @@
     mode=660
     owner=root
     group=www
+  when: cspini.stat.exists
   notify: restart apache2
   tags: configuration
