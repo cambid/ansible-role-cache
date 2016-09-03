@@ -2,23 +2,38 @@
 
 # Set /etc/sysctl.conf
 
-- sysctl: name=vm.swappiness value="{{ os_swappiness }}" state=present
-- sysctl: name=vm.dirty_background_ratio value="{{ os_dirty_background_ratio }}" state=present
-- sysctl: name=vm.dirty_ratio value="{{ os_dirty_ratio }}" state=present
+- sysctl:
+    name: vm.swappiness
+    value: "{{ os_swappiness }}"
+    state: present
+- sysctl:
+    name: vm.dirty_background_ratio
+    value: "{{ os_dirty_background_ratio }}"
+    state: present
+- sysctl:
+    name: vm.dirty_ratio
+    value: "{{ os_dirty_ratio }}"
+    state: present
 
 # This is an example only of using calculations
-
-- debug: msg="Memory in MB {{ ansible_memtotal_mb }}"
-- debug: msg="Memory in GB {{ ansible_memtotal_mb/1024 }}"
-- debug: msg="Memory in bytes {{ ansible_memtotal_mb * 1024 *1024 }}"
-- debug: msg="Number of Huge Pages {{ (((hs_percent_shared_memory/100) * ansible_memtotal_mb)/2)|round|int }}"
+- debug:
+    msg: "Memory in GB {{ ansible_memtotal_mb/1024 }}"
+- debug:
+    msg: "Number of Huge Pages {{ (((hs_percent_shared_memory/100) * ansible_memtotal_mb)/2)|round|int }}"
 
 # Huge pages are 2MB on RH Intel
 # Huge pages must be greater than total shared memory (routine + global buffers + GMHEAP + Other)
 
-- sysctl: name=vm.nr_hugepages value="{{ (((hs_percent_shared_memory/100) * ansible_memtotal_mb)/2)|round|int  }}" state=present reload=yes
+- sysctl:
+  name: vm.nr_hugepages
+  value: "{{ (((hs_percent_shared_memory/100) * ansible_memtotal_mb)/2)|round|int  }}"
+  state: present
+  reload: yes
 
 
 # shmmax can be as big as we want - there is no penalty, make same size as memory
-
-- sysctl: name=kernel.shmmax value="{{ ansible_memtotal_mb * 1024 *1024 }}" state=present reload=yes
+- sysctl:
+    name: kernel.shmmax
+    value: "{{ ansible_memtotal_mb * 1024 *1024 }}"
+    state: present
+    reload: yes

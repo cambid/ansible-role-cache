@@ -3,5 +3,5 @@
   command: ccontrol stop "{{ ISC_PACKAGE_INSTANCENAME }}" restart quietly
 - name: restart apache2
   service:
-    name=apache2
-    state=restarted
+    name: apache2
+    state: restarted
