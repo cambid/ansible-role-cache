@@ -25,10 +25,10 @@
 # Huge pages must be greater than total shared memory (routine + global buffers + GMHEAP + Other)
 
 - sysctl:
-  name: vm.nr_hugepages
-  value: "{{ (((hs_percent_shared_memory/100) * ansible_memtotal_mb)/2)|round|int  }}"
-  state: present
-  reload: yes
+    name: vm.nr_hugepages
+    value: "{{ (((hs_percent_shared_memory/100) * ansible_memtotal_mb)/2)|round|int  }}"
+    state: present
+    reload: yes
 
 
 # shmmax can be as big as we want - there is no penalty, make same size as memory
