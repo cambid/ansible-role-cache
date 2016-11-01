@@ -6,7 +6,7 @@ common_install_base_path: /tmp/cacheinstall
 
 # Path to distribution fies on local server
 # YOU WILL HAVE TO CHANGE THIS FOR YOUR SET UP
-common_path_to_distribution_files: distribution
+common_path_to_distribution_files: files
 common_path_to_distribution_files_Cache: "{{ common_path_to_distribution_files }}/cache"
 cache_key_file: cache.key
 

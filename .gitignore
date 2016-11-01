@@ -1,2 +1,2 @@
-distribution/cache/*.tar.gz
-distribution/cache/*.key
+files/cache/*.tar.gz
+files/cache/*.key
