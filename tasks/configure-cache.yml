@@ -79,7 +79,7 @@
 
 - name: Set default cache instance
   command: "ccontrol default {{ ISC_PACKAGE_INSTANCENAME }}"
-  when: default_cache_instance.stdout != "{{ ISC_PACKAGE_INSTANCENAME }}"
+  when: default_cache_instance.stdout != ISC_PACKAGE_INSTANCENAME|string
 
 - name: get file stats of local csp.conf
   delegate_to: localhost
