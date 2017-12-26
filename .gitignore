@@ -1,2 +1,4 @@
 files/cache/*.tar.gz
 files/cache/*.key
+files/iris/*.key
+files/iris/*.tar.gz
