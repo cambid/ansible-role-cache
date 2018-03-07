@@ -50,7 +50,7 @@ security_settings.dbencrypted: 0
 security_settings.dbenckeyfile:
 security_settings.dbenckeyuser:
 security_settings.personal_database:
-security_settings.initial_level: Locked Down
+security_settings.initial_level: {{ SECURITY_LEVEL | default('Locked Down')  }}
 security_settings.already_secured: N
 security_settings.password: {{ ISC_PACKAGE_SMP_CSP_PASSWORD }}
 security_settings.csppassword: {{ ISC_PACKAGE_SMP_CSP_PASSWORD }}
