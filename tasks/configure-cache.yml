@@ -47,6 +47,7 @@
   when: ansible_os_family == 'Suse' or ansible_os_family == 'RedHat'
   environment:
     ISC_PACKAGE_MODE: "unattended"
+    LANG: "{{ LANG | default ('en_US.UTF-8')  }}"
   args:
     creates: "{{ ISC_PACKAGE_INSTALLDIR }}/cinstall.log"
 
