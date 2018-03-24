@@ -96,7 +96,7 @@
   copy:
     src="{{ path_to_tmp_files }}/csp.conf"
     dest=/etc/apache2/conf.d/
-    mode=644
+    mode=0644
     owner=root
     group=root
   when: cspconf.stat.exists
@@ -115,7 +115,7 @@
   copy:
     src="{{ path_to_tmp_files }}/CSP.ini"
     dest="{{ ISC_CSP_GATEWAY_DIR }}/bin"
-    mode=660
+    mode=0660
     owner=root
     group=www
   when: cspini.stat.exists
