@@ -43,7 +43,7 @@
 # Its shown here because installing with a parameters file requires a user response to go ahead.
 
 - name: Unattended install of hs/Cache from parameters file
-  shell: "{{ hs_parameterfile_location_hs2015 }} {{ common_install_base_path }}/{{ hs_parameterfile_name }}"
+  command: "{{ hs_parameterfile_location_hs2015 }} {{ common_install_base_path }}/{{ hs_parameterfile_name }}"
   when: ansible_os_family == 'Suse' or ansible_os_family == 'RedHat'
   environment:
     ISC_PACKAGE_MODE: "unattended"
