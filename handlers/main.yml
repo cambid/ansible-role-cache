@@ -1,6 +1,14 @@
 ---
 - name: restart Cache
   command: ccontrol stop "{{ ISC_PACKAGE_INSTANCENAME }}" restart quietly
+  listen: "restart database"
+  when: hs_distribution_file is not search("IRIS")
+
+- name: restart IRIS
+  command: iris stop "{{ ISC_PACKAGE_INSTANCENAME }}" restart quietly
+  listen: "restart database"
+  when: hs_distribution_file is search("IRIS")
+
 - name: restart apache2
   service:
     name: apache2

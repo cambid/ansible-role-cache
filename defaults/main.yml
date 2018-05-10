@@ -18,6 +18,9 @@ hs_cachemgr_group: bin
 hs_cache_usr: root
 hs_cache_usr_sys: root
 
+# cache utility default
+hs_cache_control: ccontrol
+
 # HS default install temp file upack directory
 hs_install_unpack_path: unpack
 

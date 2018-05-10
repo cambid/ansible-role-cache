@@ -72,16 +72,16 @@
 
 - name: copy hs key
   copy: src="{{ common_path_to_distribution_files_Cache }}/{{ cache_key_file }}" dest="{{ ISC_PACKAGE_INSTALLDIR }}/mgr"
-  notify: restart Cache
+  notify: "restart database"
   tags: copy,license
 
 - name: check default cache instance
-  command: "ccontrol default"
+  command: "{{ hs_cache_control }} default"
   register: default_cache_instance
   changed_when: false
 
 - name: Set default cache instance
-  command: "ccontrol default {{ ISC_PACKAGE_INSTANCENAME }}"
+  command: "{{ hs_cache_control }} default {{ ISC_PACKAGE_INSTANCENAME }}"
   when: default_cache_instance.stdout != ISC_PACKAGE_INSTANCENAME|string
 
 - name: get file stats of local csp.conf
