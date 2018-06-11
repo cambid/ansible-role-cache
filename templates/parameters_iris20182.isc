@@ -1,7 +1,7 @@
 dist.source_dir: {{ common_install_base_path }}/{{ hs_install_unpack_path }}/{{ hs_distribution_file  }}
 
-product_info.version: 2018.1.0.480.0
-product_info.name: IDP
+product_info.version: 2018.2.0SQL0.215.0
+product_info.name: IRIS
 product_info.displayed_name: InterSystems IRIS
 platform_selection.platform: lnx{{ hs_distribution_name }}x64
 platform_selection.platform_family: lnx{{ hs_distribution_name }}x64
@@ -34,7 +34,7 @@ server_location.is_new_directory: N
 server_location.is_new_install: Y
 server_location.is_new_directory: Y
 {% endif %}
-server_location.registry_dir: /usr/local/etc/cachesys
+server_location.registry_dir: /usr/local/etc/irissys
 server_location.convert_ensemble_registry:
 server_location.ccontrol: {{ common_install_base_path }}/{{ hs_install_unpack_path }}/ {{ hs_distribution_file }}/dist/lnx{{ hs_distribution_name }}x64/bin/shared/ccontrol
 server_location.is_dr_mirror: N
