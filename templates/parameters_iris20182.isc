@@ -1,6 +1,6 @@
 dist.source_dir: {{ common_install_base_path }}/{{ hs_install_unpack_path }}/{{ hs_distribution_file  }}
 
-product_info.version: 2018.2.0SQL0.215.0
+product_info.version: 2018.2.0.490.0
 product_info.name: IRIS
 product_info.displayed_name: InterSystems IRIS
 platform_selection.platform: lnx{{ hs_distribution_name }}x64
@@ -82,7 +82,7 @@ agent.user_group: iscagent
 agent.install: Y
 client_location.target_dir: {{ ISC_PACKAGE_INSTALLDIR }}
 client_location.is_client_install: N
-install: odbc
+install: nodejs_kit
 install: database_server
 postinstall: database_server
 install: samples
@@ -91,11 +91,14 @@ japanese_docs.install: N
 install: docbook
 docbook.install: Y
 install: dev_kit
+install: odbc
 install: iris_databases
 install: fop
 install: renderserver
 install: printserver
 install: excelexporter
+install: engine_link_libraries
 install: addenda
+install: install_confirmation
 install: path_permissions
 install: copyright
