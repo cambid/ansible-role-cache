@@ -1,9 +1,16 @@
 ---
 - name: "include os-specific variables"
   include_vars: os-{{ ansible_os_family }}.yml
-  when: ansible_os_family == 'Suse' or ansible_os_family == 'RedHat'
+  when: ansible_os_family == 'RedHat'
+
+- name: "include distribution specific variables"
+  include_vars: os-{{ ansible_distribution }}.yml
+  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'SLES'
 
 - include_tasks: setup-{{ ansible_os_family }}.yml
-  when: ansible_os_family == 'Suse' or ansible_os_family == 'RedHat'
+  when: ansible_os_family == 'RedHat'
+
+- include_tasks: setup-{{ ansible_distribution }}.yml
+  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'SLES'
 
 - include_tasks: configure-cache.yml

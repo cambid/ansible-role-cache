@@ -1,0 +1,27 @@
+### Suse Caché specific OS config
+
+# Set /etc/sysctl.conf
+- sysctl:
+    name: vm.swappiness
+    value: "{{ os_swappiness }}"
+    state: present
+- sysctl:
+    name: vm.dirty_background_ratio
+    value: "{{ os_dirty_background_ratio }}"
+    state: present
+- sysctl:
+    name: vm.dirty_ratio
+    value: "{{ os_dirty_ratio }}"
+    state: present
+
+- debug:
+    msg: "Memory in GB {{ ansible_memtotal_mb/1024 }}"
+- debug:
+    msg: "Number of Huge Pages {{ (((hs_percent_shared_memory/100) * ansible_memtotal_mb)/2)|round|int }}"
+
+# Huge pages are 2MB on Suse and must be greater than total shared memory (routine + global buffers + GMHEAP + Other)
+- sysctl:
+    name: vm.nr_hugepages
+    value: "{{(((hs_percent_shared_memory/100) * ansible_memtotal_mb)/2)|round|int  }}"
+    state: present
+    reload: yes
