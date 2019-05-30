@@ -1,5 +1,6 @@
 sudo: required
 language: python
+dist: xenial
 
 services:
   - docker
@@ -15,10 +16,10 @@ before_install:
   - 'sudo docker run --name ${distribution/cambid\//}_${version} -d ${distribution}:${version} sleep infinity'
 
 install:
-  - sudo pip install --upgrade pip
-  - sudo pip install docker-py
-  - sudo apt-get install ansible
+  - sudo -H pip install --upgrade pip
+  - sudo -H pip install docker-py
+  - sudo -H pip install ansible
 
 script:
-  - ANSIBLE_ROLES_PATH=../.. ansible-playbook --syntax-check tests/iris.yaml
-  - ANSIBLE_ROLES_PATH=../.. ansible-playbook -i tests/inventory tests/iris.yaml
+  - ANSIBLE_ROLES_PATH=.. ansible-playbook --syntax-check tests/iris.yaml
+  - ANSIBLE_ROLES_PATH=.. ansible-playbook -i tests/inventory tests/iris.yaml
