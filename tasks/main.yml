@@ -8,9 +8,13 @@
   when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'SLES'
 
 - include_tasks: setup-{{ ansible_os_family }}.yml
-  when: ansible_os_family == 'RedHat'
+  when:
+    - ansible_os_family == 'RedHat'
+    - ansible_virtualization_type != 'docker'
 
 - include_tasks: setup-{{ ansible_distribution }}.yml
-  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'SLES'
+  when:
+    - ansible_distribution == 'Ubuntu' or ansible_distribution == 'SLES'
+    - ansible_virtualization_type != 'docker'
 
 - include_tasks: configure-cache.yml
