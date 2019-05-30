@@ -1,6 +1,6 @@
+dist: xenial
 sudo: required
 language: python
-dist: xenial
 
 services:
   - docker
