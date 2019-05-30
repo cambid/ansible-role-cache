@@ -6,12 +6,12 @@ services:
 env:
   - distribution: centos
     version: 7
-  - distribution: ubuntu-python
+  - distribution: cambid/ubuntu-python
     version: latest
 
 before_install:
   - 'sudo docker pull ${distribution}:${version}'
-  - 'sudo docker run --name ${distribution}:${version} -d ${distribution}:${version} sleep infinity'
+  - 'sudo docker run --name ${distribution}_${version} -d ${distribution}:${version} sleep infinity'
 
 install:
   - pip install docker-py
