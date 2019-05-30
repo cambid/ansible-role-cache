@@ -1,0 +1,22 @@
+sudo: required
+
+services:
+  - docker
+
+env:
+  - distribution: centos
+    version: 7
+  - distribution: ubuntu-python
+    version: latest
+
+before_install:
+  - 'sudo docker pull ${distribution}:${version}'
+  - 'sudo docker run --name ${distribution}:${version} -d ${distribution}:${version} sleep infinity'
+
+install:
+  - pip install docker-py
+  - apt-get install ansible
+
+script:
+  - ANSIBLE_ROLES_PATH=../.. ansible-playbook --syntax-check tests/iris.yaml
+  - ANSIBLE_ROLES_PATH=../.. ansible-playbook -i tests/inventory tests/iris.yaml
