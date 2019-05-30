@@ -22,4 +22,4 @@ install:
 
 script:
   - ANSIBLE_ROLES_PATH=.. ansible-playbook --syntax-check tests/iris.yaml
-  - ANSIBLE_ROLES_PATH=.. ansible-playbook -i tests/inventory tests/iris.yaml
+  - ANSIBLE_ROLES_PATH=.. ansible-playbook -l ${distribution/cambid\//}_${version} -i tests/inventory tests/iris.yaml
