@@ -1,4 +1,5 @@
 sudo: required
+language: python
 
 services:
   - docker
@@ -14,7 +15,7 @@ before_install:
   - 'sudo docker run --name ${distribution/cambid\//}_${version} -d ${distribution}:${version} sleep infinity'
 
 install:
-  - sudo pip upgrade
+  - sudo pip install --upgrade pip
   - sudo pip install docker-py
   - sudo apt-get install ansible
 
