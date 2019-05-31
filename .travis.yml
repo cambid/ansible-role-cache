@@ -27,7 +27,7 @@ install:
 script:
   - ANSIBLE_ROLES_PATH=.. ansible-playbook -i tests/inventory --syntax-check tests/iris.yaml
   - ANSIBLE_ROLES_PATH=.. ansible-playbook -l ${distribution/cambid\//}_${version} -i tests/inventory tests/iris.yaml
-  - ANSIBLE_ROLES_PATH=.. ansible-playbook -l ${distribution/cambid\//}_${version} -i tests/inventory tests/iris.yaml | grep -q 'changed=0.*failed=0' && (echo 'Idempotence test: pass' && exit 0) || (echo 'Idempotence test: fail' && exit 1)
+  - ANSIBLE_ROLES_PATH=.. ansible-playbook -l ${distribution/cambid\//}_${version} -i tests/inventory tests/iris.yaml | grep -q 'changed=0.*failed=0' && (echo 'Idempotence test pass' && exit 0) || (echo 'Idempotence test fail' && exit 1)
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
