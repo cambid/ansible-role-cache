@@ -1,4 +1,26 @@
 ---
+- name: "check that the file iris exists"
+  stat:
+    path: /usr/bin/iris
+  register: stat_result
+
+- name: "only execute tasks if iris is installed"
+  block:
+  - name: "get installed version"
+    command: iris qlist
+    register: qlist
+    changed_when: False
+
+  - name: "set fact for version"
+    set_fact:
+      installed_version: "{{ qlist.stdout.split('^')[2] }}"
+    when: qlist.stdout
+
+  - name: "compare installed_version and requested version"
+    meta: end_host
+    when: installed_version == hs_distribution_version
+  when: stat_result.stat.exists
+
 - name: "include os-specific variables"
   include_vars: os-{{ ansible_os_family }}.yml
   when: ansible_os_family == 'RedHat'
