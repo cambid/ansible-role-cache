@@ -2,15 +2,20 @@
 
 # Set /etc/sysctl.conf
 
-- sysctl:
+- name: "set vm.swappiness"
+  sysctl:
     name: vm.swappiness
     value: "{{ os_swappiness }}"
     state: present
-- sysctl:
+
+- name: "set vm.dirty_background_ratio"
+  sysctl:
     name: vm.dirty_background_ratio
     value: "{{ os_dirty_background_ratio }}"
     state: present
-- sysctl:
+
+- name: "set vm.dirty_ratio"
+  sysctl:
     name: vm.dirty_ratio
     value: "{{ os_dirty_ratio }}"
     state: present
@@ -24,7 +29,8 @@
 # Huge pages are 2MB on RH Intel
 # Huge pages must be greater than total shared memory (routine + global buffers + GMHEAP + Other)
 
-- sysctl:
+- name: "set vm.nr_hugepages"
+  sysctl:
     name: vm.nr_hugepages
     value: "{{ (((hs_percent_shared_memory/100) * ansible_memtotal_mb)/2)|round|int  }}"
     state: present
@@ -32,7 +38,8 @@
 
 
 # shmmax can be as big as we want - there is no penalty, make same size as memory
-- sysctl:
+- name: "set kernel.shmmax"
+  sysctl:
     name: kernel.shmmax
     value: "{{ ansible_memtotal_mb * 1024 *1024 }}"
     state: present
