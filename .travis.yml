@@ -12,6 +12,8 @@ env:
     version: latest
 
 before_install:
+  - cd files/iris; wget --http-user=${username} --http-password=${password} https://download.faderweb.de/IRIS-2019.1.0.510.0-lnxrhx64.tar.gz https://download.faderweb.de/IRIS-2019.1.0.510.0-lnxubuntux64.tar.gz
+  - cd files/iris; touch iris.key
   - 'sudo docker pull ${distribution}:${version}'
   - 'sudo docker run --name ${distribution/cambid\//}_${version} -d ${distribution}:${version} sleep infinity'
 
