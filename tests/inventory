@@ -1,0 +1,2 @@
+centos_7 ansible_connection=docker
+ubuntu-python_latest ansible_connection=docker
