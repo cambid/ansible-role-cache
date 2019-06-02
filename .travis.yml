@@ -1,3 +1,4 @@
+---
 dist: xenial
 sudo: required
 language: python
@@ -16,18 +17,15 @@ env:
 before_install:
   - wget -P files/iris --no-verbose --http-user=${username} --http-password=${password} https://download.faderweb.de/IRIS-2019.1.0.510.0-lnx${distribution_name}x64.tar.gz
   - touch files/iris/iris.key
-  - 'sudo docker pull ${distribution}:${version}'
-  - 'sudo docker run --name ${distribution/cambid\//}_${version} -d ${distribution}:${version} sleep infinity'
 
 install:
   - sudo -H pip install --upgrade pip
-  - sudo -H pip install docker-py
-  - sudo -H pip install ansible
+  - sudo -H pip install molecule docker ansible
 
 script:
-  - ANSIBLE_ROLES_PATH=.. ansible-playbook -i tests/inventory --syntax-check tests/iris.yaml
-  - ANSIBLE_ROLES_PATH=.. ansible-playbook -l ${distribution/cambid\//}_${version} -i tests/inventory tests/iris.yaml
-  - ANSIBLE_ROLES_PATH=.. ansible-playbook -l ${distribution/cambid\//}_${version} -i tests/inventory tests/iris.yaml | grep -q 'changed=0.*failed=0' && (echo 'Idempotence test pass' && exit 0) || (echo 'Idempotence test fail' && exit 1)
+  - molecule --version
+  - ansible --version
+  - molecule test
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

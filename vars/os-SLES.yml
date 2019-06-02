@@ -1,14 +1,14 @@
 ---
-  hs_distribution_name: suse
-  when: ansible_os_family == 'Suse'
+hs_distribution_name: suse
+when: ansible_os_family == 'Suse'
 
 # operating System setup - this will be application specific.
 
-  os_swappiness: 5
-  os_dirty_background_ratio: 5
-  os_dirty_ratio: 10
+os_swappiness: 5
+os_dirty_background_ratio: 5
+os_dirty_ratio: 10
 
 # minimal security for demo - this must be changed for live environments
 
-  os_disable_selinux: true
-  os_disable_iptables: true
+os_disable_selinux: true
+os_disable_iptables: true

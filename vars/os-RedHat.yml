@@ -1,15 +1,15 @@
 ---
 
-  hs_distribution_name: rh
-  when: ansible_os_family == 'RedHat'
+hs_distribution_name: rh
+when: ansible_os_family == 'RedHat'
 
 # operating System setup - this will be application specific.
 
-  os_swappiness: 5
-  os_dirty_background_ratio: 5
-  os_dirty_ratio: 10
+os_swappiness: 5
+os_dirty_background_ratio: 5
+os_dirty_ratio: 10
 
 # minimal security for demo - this must be changed for live environments
 
-  os_disable_selinux: true
-  os_disable_iptables: true
+os_disable_selinux: true
+os_disable_iptables: true
