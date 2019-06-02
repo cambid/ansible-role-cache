@@ -6,21 +6,13 @@ language: python
 services:
   - docker
 
-env:
-  - distribution: centos
-    distribution_name: rh
-    version: 7
-  - distribution: cambid/ubuntu-python
-    distribution_name: ubuntu
-    version: latest
-
 before_install:
-  - wget -P files/iris --no-verbose --http-user=${username} --http-password=${password} https://download.faderweb.de/IRIS-2019.1.0.510.0-lnx${distribution_name}x64.tar.gz
+  - wget -P files/iris --no-verbose --http-user=${username} --http-password=${password} https://download.faderweb.de/IRIS-2019.1.0.510.0-lnxubuntux64.tar.gzhttps://download.faderweb.de/IRIS-2019.1.0.510.0-lnxrhx64.tar.gz
   - touch files/iris/iris.key
 
 install:
   - sudo -H pip install --upgrade pip
-  - sudo -H pip install molecule docker ansible
+  - sudo -H pip install molecule docker-py ansible
 
 script:
   - molecule --version
