@@ -7,7 +7,7 @@ services:
   - docker
 
 before_install:
-  - wget -P files/iris --no-verbose --http-user=${username} --http-password=${password} https://download.faderweb.de/IRIS-2019.1.0.510.0-lnxubuntux64.tar.gzhttps://download.faderweb.de/IRIS-2019.1.0.510.0-lnxrhx64.tar.gz
+  - wget -P files/iris --no-verbose --http-user=${username} --http-password=${password} https://download.faderweb.de/IRIS-2019.1.0.510.0-lnxubuntux64.tar.gz https://download.faderweb.de/IRIS-2019.1.0.510.0-lnxrhx64.tar.gz
   - touch files/iris/iris.key
 
 install:
