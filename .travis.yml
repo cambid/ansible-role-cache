@@ -13,6 +13,7 @@ before_install:
   - touch files/iris/iris.key
 
 install:
+  - sudo -H apt-get remove python-yaml
   - sudo -H pip install --upgrade pip
   - sudo -H pip install molecule
   - sudo -H pip install docker-py
