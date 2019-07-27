@@ -1,0 +1,14 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: True
+  roles:
+    - role: ansible-role-cache
+  vars:
+    - hs_distribution_version: 2018.1.2.309.5
+    - hs_cache_usr: root
+    - hs_cache_usr_sys: root
+    - hs_cache_group: root
+    - ISC_PACKAGE_UNICODE: Y
+    - ISC_BINARY_TYPE: unicode
+    - SECURITY_LEVEL: None
