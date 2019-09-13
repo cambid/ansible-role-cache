@@ -17,6 +17,8 @@ galaxy_info:
         - 11SP3
         - 11SP4
         - 12
+        - 12SP1
+        - 15
     - name: EL
       versions:
         - 7
@@ -28,4 +30,5 @@ galaxy_info:
     - intersystems
     - database
     - cache
+    - iris
 dependencies: []
