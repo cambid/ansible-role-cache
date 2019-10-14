@@ -34,7 +34,7 @@ hs_install_unpack_path: unpack
 hs_distribution_file: "cache-{{ hs_distribution_version }}-lnx{{ hs_distribution_name }}x64"
 
 # Destination file paths
-hs_parameterfile_location_hs2015: "{{ common_install_base_path }}/unpack/{{ hs_distribution_file }}/package/installFromParametersFile"
+hs_parameterfile_location_hs2015: "{{ common_install_base_path }}/{{ hs_install_unpack_path }}/{{ hs_distribution_file }}/package/installFromParametersFile"
 hs_parameterfile_name: parameters_cache20162.isc
 
 ISC_PACKAGE_INSTANCENAME: CACHE
