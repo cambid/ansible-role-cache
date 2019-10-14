@@ -35,7 +35,7 @@ server_location.is_new_directory: Y
 {% endif %}
 server_location.registry_dir: /usr/local/etc/cachesys
 server_location.convert_ensemble_registry:
-server_location.ccontrol: {{ common_install_base_path }}/{{ hs_install_unpack_path }}/ {{ hs_distribution_file }}/dist/lnx{{ hs_distribution_name }}x64/bin/shared/ccontrol
+server_location.ccontrol: {{ common_install_base_path }}/{{ hs_install_unpack_path }}/{{ hs_distribution_file }}/dist/lnx{{ hs_distribution_name }}x64/bin/shared/ccontrol
 install_mode.setup_type: Custom
 unicode_selection.binary_type: {{ ISC_BINARY_TYPE }}
 unicode_selection.install_unicode: {{ ISC_PACKAGE_UNICODE }}
