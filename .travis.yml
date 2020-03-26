@@ -23,7 +23,7 @@ install:
 script:
   - molecule --version
   - ansible --version
-  - molecule test --all
+  - molecule test --all --parallel
 
 notifications:
   webhooks:
