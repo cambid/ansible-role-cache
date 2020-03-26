@@ -10,6 +10,8 @@ lint: |
 platforms:
   - name: centos_7
     image: centos:7
+  - name: centos_8
+    image: centos:8
   - name: ubuntu_bionic
     image: ubuntu:bionic
 provisioner:
