@@ -18,6 +18,7 @@ install:
   - sudo -H pip install --upgrade pip
   - sudo -H pip install molecule
   - sudo -H pip install docker-py
+  - sudo -H pip install ansible-lint
 
 script:
   - molecule --version
