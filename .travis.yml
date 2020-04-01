@@ -9,9 +9,8 @@ services:
   - docker
 
 before_install:
-  - wget -P files/iris --no-verbose --http-user=${username} --http-password=${password} https://download.faderweb.de/IRIS-2019.1.0.510.0-lnxubuntux64.tar.gz https://download.faderweb.de/IRIS-2019.1.0.510.0-lnxrhx64.tar.gz https://download.faderweb.de/IRIS-2019.1.1.612.0-lnx{rh,ubuntu}x64.tar.gz
+  - wget -P files/iris --no-verbose --http-user=${username} --http-password=${password} https://download.faderweb.de/IRIS-2019.1.0.510.0-lnxubuntux64.tar.gz https://download.faderweb.de/IRIS-2019.1.0.510.0-lnxrhx64.tar.gz https://download.faderweb.de/IRIS-2019.1.1.612.0-lnx{rh,ubuntu}x64.tar.gz https://download.faderweb.de/IRIS-2020.1.0.215.0-lnx{rh,ubuntu}x64.tar.gz
   - wget -P files/cache --no-verbose --http-user=${username} --http-password=${password} https://download.faderweb.de/cache-2018.1.2.309.5-lnx{rh,ubuntu}x64.tar.gz https://download.faderweb.de/cache-2017.2.2.865.3-lnxrhx64.tar.gz
-  - wget -P files/cache --no-verbose --http-user=${username} --http-password=${password} https://download.faderweb.de/IRIS-2020.1.0.215.0-lnx{rh,ubuntu}x64.tar.gz
   - touch files/iris/iris.key files/cache/cache.key
 
 install:
