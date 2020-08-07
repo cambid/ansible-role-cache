@@ -45,3 +45,4 @@
     value: "{{ ansible_memtotal_mb * 1024 *1024 }}"
     state: present
     reload: yes
+    ignoreerrors: yes

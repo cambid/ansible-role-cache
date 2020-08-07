@@ -32,3 +32,4 @@
     value: "{{ (((hs_percent_shared_memory/100) * ansible_memtotal_mb)/2)|round|int }}"
     state: present
     reload: yes
+    ignoreerrors: yes
