@@ -1,6 +1,5 @@
 ---
-dist: xenial
-sudo: required
+dist: bionic
 language: python
 python:
   - "3.8"
