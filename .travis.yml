@@ -14,11 +14,12 @@ before_install:
 
 install:
   - sudo -H apt-get remove python-yaml python3-yaml
-  - sudo -H pip install --upgrade pip
-  - sudo -H pip install molecule
-  - sudo -H pip install molecule-docker
-  - sudo -H pip install docker-py
-  - sudo -H pip install ansible-lint
+  - sudo -H apt-get install python3-pip
+  - sudo -H pip3 install --upgrade pip
+  - sudo -H pip3 install molecule
+  - sudo -H pip3 install molecule-docker
+  - sudo -H pip3 install docker-py
+  - sudo -H pip3 install ansible-lint
 
 script:
   - molecule --version
