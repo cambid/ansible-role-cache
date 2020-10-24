@@ -13,15 +13,17 @@ before_install:
   - touch files/iris/iris.key files/cache/cache.key
 
 install:
-  - sudo -H apt-get remove python-yaml
+  - sudo -H apt-get remove python-yaml python3-yaml
   - sudo -H pip install --upgrade pip
   - sudo -H pip install molecule
+  - sudo -H pip install molecule-docker
   - sudo -H pip install docker-py
   - sudo -H pip install ansible-lint
 
 script:
   - molecule --version
   - ansible --version
+  - ansible-lint --version
   - molecule test --all --parallel
 
 notifications:
