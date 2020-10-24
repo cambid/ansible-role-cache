@@ -42,11 +42,15 @@
   file:
     path: "{{ ISC_PACKAGE_INSTALLDIR }}"
     state: directory
+    mode: 0666
+    owner: "{{ hs_cache_usr_sys }}"
 
 - name: Process parameters file
   template:
     src: "{{ hs_parameterfile_name }}"
     dest: "{{ common_install_base_path }}"
+    mode: 0666
+    owner: "{{ hs_cache_usr_sys }}"
   tags: template
 
 
@@ -68,6 +72,8 @@
   copy:
     src: "{{ common_path_to_distribution_files_Cache }}/{{ cache_key_file }}"
     dest: "{{ ISC_PACKAGE_INSTALLDIR }}/mgr"
+    mode: 0666
+    owner: "{{ hs_cache_usr_sys }}"
   notify: "restart database"
   tags: copy,license
 
