@@ -1,5 +1,27 @@
 ---
 
+- name: "check that the file cache exists"
+  stat:
+    path: /usr/bin/cache
+  register: stat_result
+
+- name: "only execute tasks if cache is installed"
+  block:
+    - name: "get installed version of cache"
+      command: ccontrol qlist
+      register: qlist
+      changed_when: False
+
+    - name: "set fact for version of cache"
+      set_fact:
+        installed_version: "{{ qlist.stdout.split('^')[2] }}"
+      when: qlist.stdout
+
+    - name: "compare installed version and requested version of cache"
+      meta: end_host
+      when: installed_version == hs_distribution_version
+  when: stat_result.stat.exists
+
 - name: "check that the file iris exists"
   stat:
     path: /usr/bin/iris
@@ -7,17 +29,17 @@
 
 - name: "only execute tasks if iris is installed"
   block:
-    - name: "get installed version"
+    - name: "get installed version of iris"
       command: iris qlist
       register: qlist
       changed_when: False
 
-    - name: "set fact for version"
+    - name: "set fact for version of iris"
       set_fact:
         installed_version: "{{ qlist.stdout.split('^')[2] }}"
       when: qlist.stdout
 
-    - name: "compare installed_version and requested version"
+    - name: "compare installed version and requested version of cache"
       meta: end_host
       when: installed_version == hs_distribution_version
   when: stat_result.stat.exists
