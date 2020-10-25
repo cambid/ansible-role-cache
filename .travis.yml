@@ -15,10 +15,11 @@ services:
 install:
   - sudo -H apt-get remove python-yaml python3-yaml
   - sudo -H apt-get install python3-pip
-  - sudo -H pip install --upgrade pip
-  - sudo -H pip install molecule
-  - sudo -H pip install docker-py
-  - sudo -H pip install ansible-lint
+  - pip install --upgrade pip
+  - pip install molecule
+  - pip install molecule-docker
+  - pip install docker-py
+  - pip install ansible-lint
 
 script:
   - molecule --version
