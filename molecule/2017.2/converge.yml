@@ -3,7 +3,7 @@
   hosts: all
   gather_facts: True
   roles:
-    - role: ansible-role-cache
+    - role: cambid.intersystems_cache
   vars:
     - hs_distribution_version: 2017.2.2.865.3
     - hs_cache_usr: root

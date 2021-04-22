@@ -14,7 +14,5 @@ platforms:
     image: centos:8
   - name: ubuntu_bionic
     image: ubuntu:bionic
-  - name: ubuntu_focal
-    image: ubuntu:ubuntu_focal
 provisioner:
   name: ansible
