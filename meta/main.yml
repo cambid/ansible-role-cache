@@ -1,8 +1,9 @@
 ---
 galaxy_info:
+  role_name: intersystems_cache
+  namespace: cambid
   author: Jan Fader
   description: unattended installation of Intersystems Cache
-  company: bpm consult ag
 
   license: GPLv3
 
