@@ -3,7 +3,7 @@
   hosts: all
   gather_facts: True
   roles:
-    - role: ansible-role-cache
+    - role: cambid.intersystems_cache
   vars:
     - hs_distribution_version: 2020.1.0.215.0
     - hs_distribution_file: "IRIS-{{ hs_distribution_version }}-lnx{{ hs_distribution_name }}x64"
