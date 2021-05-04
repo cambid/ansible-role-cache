@@ -15,6 +15,6 @@ platforms:
   - name: ubuntu_bionic
     image: ubuntu:bionic
   - name: ubuntu_focal
-    image: ubuntu:ubuntu_focal
+    image: ubuntu:focal
 provisioner:
   name: ansible
