@@ -1,0 +1,109 @@
+dist.source_dir: {{ common_install_base_path }}/{{ hs_install_unpack_path }}/IRIS-{{ hs_distribution_version }}-lnx{{ hs_distribution_name }}x64
+
+product_info.version: 2021.1.0.205.0
+product_info.name: IRIS
+product_info.displayed_name: InterSystems IRIS
+platform_selection.platform: lnx{{ hs_distribution_name }}x64
+platform_selection.platform_family: lnx{{ hs_distribution_name }}x64
+platform_selection.endianness: little
+platform_selection.os: Linux
+posix_tools.user_add: /usr/sbin/useradd
+posix_tools.group_add: /usr/sbin/groupadd
+posix_tools.mk_user:
+posix_tools.mk_group:
+posix_tools.grep: grep
+posix_tools.id: id
+posix_tools.ps_opt: -ef
+posix_tools.gzip: gzip
+posix_tools.shared_ext: so
+posix_tools.symbolic_copy: cp -Rfp
+posix_tools.tr: tr
+posix_tools.shared_ext1: so
+posix_tools.permission: 755
+posix_tools.dir_permission: 775
+install: server_location
+server_location.target_dir: {{ ISC_PACKAGE_INSTALLDIR }}
+server_location.bin_dir: /usr/bin
+server_location.is_server_install: Y
+server_location.is_nonroot_install: N
+server_location.instance_name: {{ ISC_PACKAGE_INSTANCENAME }}
+{% if ISC_UPGRADE  == 1 %}
+server_location.is_new_install: N
+server_location.is_new_directory: N
+{% else %}
+server_location.is_new_install: Y
+server_location.is_new_directory: Y
+{% endif %}
+server_location.cache_to_iris_upgrade: N
+server_location.registry_dir: /usr/local/etc/irissys
+server_location.convert_ensemble_registry:
+server_location.ccontrol: {{ common_install_base_path }}/{{ hs_install_unpack_path }}/{{ hs_distribution_file }}/dist/lnx{{ hs_distribution_name }}x64/bin/shared/ccontrol
+server_location.is_dr_mirror: N
+server_location.confproduct: IRIS
+postinstall: upgrade
+install_mode.setup_type: Custom
+unicode_selection.binary_type: {{ ISC_BINARY_TYPE }}
+unicode_selection.install_unicode: {{ ISC_PACKAGE_UNICODE }}
+security_settings.iris_user: {{ hs_cache_usr }}
+security_settings.iris_group: {{ hs_cache_group }}
+security_settings.manager_user: {{ hs_cache_usr_sys }}
+security_settings.manager_group: {{ hs_cachemgr_group }}
+security_settings.dbencrypted: 0
+security_settings.dbenckeyfile:
+security_settings.dbenckeyuser:
+security_settings.verold:
+security_settings.personal_database:
+security_settings.initial_level: {{ SECURITY_LEVEL | default('Locked Down')  }}
+security_settings.already_secured: N
+security_settings.password: {{ ISC_PACKAGE_SMP_CSP_PASSWORD }}
+security_settings.csppassword: {{ ISC_PACKAGE_SMP_CSP_PASSWORD }}
+security_settings.dbenckeypassword: {{ ISC_PACKAGE_SMP_CSP_PASSWORD }}
+
+installer.manifest:
+installer.manifest_parameters: SourceDir={{ common_install_base_path }}/{{ hs_install_unpack_path }},ISCUpgrade={{ ISC_UPGRADE }},
+
+installer.manifest_loglevel: 1
+installer.manifest_logfile:
+port_selection.superserver_port: {{ ISC_PACKAGE_SUPERSERVER_PORT }}
+port_selection.webserver_port: {{ ISC_PACKAGE_WEBSERVER_PORT }}
+port_selection.jdbcgateway_port: {{ ISC_PACKAGE_JDBCGATEWAY_PORT }}
+csp_gateway.configure: Y
+csp_gateway.configure_apache: N
+csp_gateway.web_server_type: None
+csp_gateway.apache_version:
+csp_gateway.apache_executable:
+csp_gateway.apache_user:
+csp_gateway.apache_conf_file:
+csp_gateway.apache_pid_file:
+csp_gateway.apache_use32bit:
+csp_gateway.directory: {{ ISC_PACKAGE_CSPDIR }}
+csp_gateway.selinuxaware: N
+license_key.enter_key: N
+license_key.license_file: -
+agent.user_account: iscagent
+agent.user_group: iscagent
+agent.install: Y
+agent.platform: LinuxSuSE
+client_location.target_dir: {{ ISC_PACKAGE_INSTALLDIR }}
+client_location.is_client_install: N
+install: nodejs_kit
+install: database_server
+postinstall: database_server
+install: samples
+samples.install: N
+japanese_docs.install: N
+install: docbook
+docbook.install: Y
+install: dev_kit
+install: odbc
+install: iris_databases
+install: healthshare_databases
+install: fop
+install: renderserver
+install: printserver
+install: excelexporter
+install: engine_link_libraries
+install: addenda
+install: install_confirmation
+install: path_permissions
+install: copyright
