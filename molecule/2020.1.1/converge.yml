@@ -5,9 +5,9 @@
   roles:
     - role: cambid.intersystems_cache
   vars:
-    - hs_distribution_version: 2021.1.0.209.0
+    - hs_distribution_version: 2020.1.1.408.0
     - hs_distribution_file: "IRIS-{{ hs_distribution_version }}-lnx{{ hs_distribution_name }}x64"
-    - hs_parameterfile_name: parameters_iris202111.isc
+    - hs_parameterfile_name: parameters_iris20182.isc
     - common_path_to_distribution_files_Cache: "{{ common_path_to_distribution_files }}/iris"
     - cache_key_file: iris.key
     - hs_cache_control: iris
