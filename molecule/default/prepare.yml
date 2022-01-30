@@ -1,0 +1,9 @@
+---
+- name: prepare
+  hosts: all
+  gather_facts: False
+  tasks:
+    - name: Install packages
+      package:
+        name: openssl
+        state: present

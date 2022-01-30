@@ -52,6 +52,20 @@
   include_vars: os-{{ ansible_distribution }}.yml
   when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'SLES'
 
+- name: "append version if newer IRIS version"
+  set_fact:
+    hs_distribution_name: "{{ hs_distribution_name }}{{ ansible_distribution_version | replace ('.','') }}"
+  when:
+    - hs_distribution_version is version('2021.2.0.649.0', '>=')
+    - ansible_distribution == 'Ubuntu'
+
+- name: "append version if newer IRIS version"
+  set_fact:
+    hs_distribution_name: "{{ hs_distribution_name }}{{ ansible_distribution_major_version }}"
+  when:
+    - hs_distribution_version is version('2021.2.0.649.0', '>=')
+    - ansible_os_family == 'RedHat' or ansible_distribution == 'SLES'
+
 - include_tasks: setup-{{ ansible_os_family }}.yml
   when:
     - ansible_os_family == 'RedHat'
