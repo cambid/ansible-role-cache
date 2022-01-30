@@ -92,7 +92,7 @@ agent.platform: LinuxSuSE
 client_location.target_dir: {{ ISC_PACKAGE_INSTALLDIR }}
 client_location.is_client_install: N
 install: nodejs_kit
-python.install: N
+python.install: {{ ISC_PYTHON | default('N')  }}
 install: database_server
 postinstall: database_server
 install: samples
