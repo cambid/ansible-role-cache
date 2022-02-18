@@ -1,0 +1,16 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
+platforms:
+  - name: almalinux_8
+    image: almalinux:8
+  - name: ubuntu_focal
+    image: ubuntu:focal
+provisioner:
+  name: ansible
