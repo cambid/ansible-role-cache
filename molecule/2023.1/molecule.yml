@@ -1,0 +1,18 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: vagrant
+lint: |
+   set -e
+   yamllint .
+   ansible-lint
+platforms:
+  - name: rhel-8
+    box: generic/rhel8
+  - name: ubuntu-focal
+    box: ubuntu/focal64
+provisioner:
+  name: ansible
+  options:
+    become: True
