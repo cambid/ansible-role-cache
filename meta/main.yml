@@ -3,7 +3,7 @@ galaxy_info:
   role_name: intersystems_cache
   namespace: cambid
   author: Jan Fader
-  description: unattended installation of Intersystems Cache
+  description: unattended installation of Intersystems Cache or Intersystems IRIS
 
   license: GPLv3
 
@@ -23,10 +23,13 @@ galaxy_info:
     - name: EL
       versions:
         - 7
+        - 8
+        - 9
     - name: Ubuntu
       versions:
         - bionic
         - focal
+        - jummy
 
   galaxy_tags:
     - intersystems
