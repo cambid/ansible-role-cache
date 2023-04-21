@@ -3,6 +3,7 @@ dependency:
   name: galaxy
 driver:
   name: vagrant
+  provision: yes
 lint: |
    set -e
    yamllint .
@@ -10,8 +11,24 @@ lint: |
 platforms:
   - name: rhel-8
     box: generic/rhel8
+    memory: 2048
+  - name: rhel-9
+    box: generic/rhel9
+    memory: 2048
+    instance_raw_config_args:
+        # reset crypto policy to allow old ssh-rsa-keys from vagrant until https://github.com/hashicorp/vagrant/issues/12589 is fixed
+      - 'vm.provision :shell, inline: "update-crypto-policies --set LEGACY"'
+      - 'vm.provision :shell, inline: "systemctl reload sshd"'
   - name: ubuntu-focal
     box: ubuntu/focal64
+    memory: 2048
+  - name: ubuntu-jammy
+    box: ubuntu/jammy64
+    memory: 2048
+    instance_raw_config_args:
+        # allow old ssh-rsa-keys from vagrant until https://github.com/hashicorp/vagrant/issues/12589 is fixed
+      - 'vm.provision :shell, inline: "echo PubkeyAcceptedKeyTypes=+ssh-rsa >> /etc/ssh/sshd_config"'
+      - 'vm.provision :shell, inline: "systemctl reload sshd"'
 provisioner:
   name: ansible
   options:
