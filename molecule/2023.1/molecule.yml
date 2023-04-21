@@ -16,7 +16,7 @@ platforms:
     box: generic/rhel9
     memory: 2048
     instance_raw_config_args:
-        # reset crypto policy to allow old ssh-rsa-keys from vagrant until https://github.com/hashicorp/vagrant/issues/12589 is fixed
+      # reset crypto policy to allow old ssh-rsa-keys from vagrant until https://github.com/hashicorp/vagrant/issues/12589 is fixed
       - 'vm.provision :shell, inline: "update-crypto-policies --set LEGACY"'
       - 'vm.provision :shell, inline: "systemctl reload sshd"'
   - name: ubuntu-focal
@@ -26,7 +26,7 @@ platforms:
     box: ubuntu/jammy64
     memory: 2048
     instance_raw_config_args:
-        # allow old ssh-rsa-keys from vagrant until https://github.com/hashicorp/vagrant/issues/12589 is fixed
+      # allow old ssh-rsa-keys from vagrant until https://github.com/hashicorp/vagrant/issues/12589 is fixed
       - 'vm.provision :shell, inline: "echo PubkeyAcceptedKeyTypes=+ssh-rsa >> /etc/ssh/sshd_config"'
       - 'vm.provision :shell, inline: "systemctl reload sshd"'
 provisioner:
