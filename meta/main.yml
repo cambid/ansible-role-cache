@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  role_name: intersystems-cache
+  role_name: intersystems_cache
   namespace: cambid
   author: Jan Fader
   description: unattended installation of Intersystems Cache or Intersystems IRIS
