@@ -1,37 +1,37 @@
 ---
 
 - name: Create default cache group
-  group:
+  ansible.builtin.group:
     name: "{{ hs_cache_group }}"
     state: present
 
 - name: Create default cache manager group
-  group:
+  ansible.builtin.group:
     name: "{{ hs_cachemgr_group }}"
     state: present
 
 - name: Create default cache user
-  user:
+  ansible.builtin.user:
     name: "{{ hs_cache_usr }}"
     comment: "cacheusr"
     group: "{{ hs_cache_group }}"
   when: hs_cache_usr != 'root'
 
 - name: Create default cache system users
-  user:
+  ansible.builtin.user:
     name: "{{ hs_cache_usr_sys }}"
     comment: "cache system usr"
     group: "{{ hs_cachemgr_group }}"
   when: hs_cache_usr_sys != 'root'
 
 - name: Create full Caché install temp directory
-  file:
+  ansible.builtin.file:
     path: "{{ common_install_base_path }}/{{ hs_install_unpack_path }}"
     mode: 0777
     state: directory
 
 - name: Unarchive install file
-  unarchive:
+  ansible.builtin.unarchive:
     src: "{{ common_path_to_distribution_files_Cache }}/{{ hs_distribution_file }}.tar.gz"
     dest: "{{ common_install_base_path }}/{{ hs_install_unpack_path }}"
     copy: yes
@@ -39,14 +39,14 @@
     creates: "{{ common_install_base_path }}/{{ hs_install_unpack_path }}/{{ hs_distribution_file }}/cinstall"
 
 - name: Create hs install directory
-  file:
+  ansible.builtin.file:
     path: "{{ ISC_PACKAGE_INSTALLDIR }}"
     state: directory
     mode: 0666
     owner: "{{ hs_cache_usr_sys }}"
 
 - name: Process parameters file
-  template:
+  ansible.builtin.template:
     src: "{{ hs_parameterfile_name }}"
     dest: "{{ common_install_base_path }}"
     mode: 0666
@@ -60,16 +60,16 @@
 # Its shown here because installing with a parameters file requires a user response to go ahead.
 
 - name: Unattended install of hs/Cache from parameters file
-  command: "{{ hs_parameterfile_location_hs2015 }} {{ common_install_base_path }}/{{ hs_parameterfile_name }}"
+  ansible.builtin.command: "{{ hs_parameterfile_location_hs2015 }} {{ common_install_base_path }}/{{ hs_parameterfile_name }}"
   when: ansible_os_family == 'Suse' or ansible_os_family == 'RedHat' or (ansible_os_family == 'Debian' and ansible_distribution == 'Ubuntu')
   environment:
     ISC_PACKAGE_MODE: "unattended"
-    LANG: "{{ LANG | default ('en_US.UTF-8')  }}"
+    LANG: "{{ LANG | default('en_US.UTF-8') }}"
   args:
     creates: "{{ ISC_PACKAGE_INSTALLDIR }}/cinstall.log"
 
-- name: copy hs key
-  copy:
+- name: Copy hs key
+  ansible.builtin.copy:
     src: "{{ common_path_to_distribution_files_Cache }}/{{ cache_key_file }}"
     dest: "{{ ISC_PACKAGE_INSTALLDIR }}/mgr"
     mode: 0666
@@ -77,25 +77,25 @@
   notify: "restart database"
   tags: copy,license
 
-- name: check default cache instance
-  command: "{{ hs_cache_control }} default"
+- name: Check default cache instance
+  ansible.builtin.command: "{{ hs_cache_control }} default"
   register: default_cache_instance
   changed_when: false
 
 - name: Set default cache instance
-  command: "{{ hs_cache_control }} default {{ ISC_PACKAGE_INSTANCENAME }}"
+  ansible.builtin.command: "{{ hs_cache_control }} default {{ ISC_PACKAGE_INSTANCENAME }}"
   when: default_cache_instance.stdout != ISC_PACKAGE_INSTANCENAME|string
 
-- name: get file stats of local csp.conf
+- name: Get file stats of local csp.conf
   delegate_to: localhost
-  stat:
-    path: "{{ path_to_tmp_files  }}/csp.conf"
+  ansible.builtin.stat:
+    path: "{{ path_to_tmp_files }}/csp.conf"
   register: cspconf
   ignore_errors: True
   become: false
 
-- name: copy apache configuration for csp-gateway
-  copy:
+- name: Copy apache configuration for csp-gateway
+  ansible.builtin.copy:
     src: "{{ path_to_tmp_files }}/csp.conf"
     dest: /etc/apache2/conf.d/
     mode: 0644
@@ -105,16 +105,16 @@
   notify: restart apache2
   tags: configuration
 
-- name: get file stats of local CSP.ini
+- name: Get file stats of local CSP.ini
   delegate_to: localhost
-  stat:
+  ansible.builtin.stat:
     path: "{{ path_to_tmp_files }}/CSP.ini"
   register: cspini
   ignore_errors: True
   become: false
 
-- name: copy CSP.ini to path
-  copy:
+- name: Copy CSP.ini to path
+  ansible.builtin.copy:
     src: "{{ path_to_tmp_files }}/CSP.ini"
     dest: "{{ ISC_CSP_GATEWAY_DIR }}/bin"
     mode: 0660

@@ -1,6 +1,5 @@
 ---
 hs_distribution_name: ubuntu
-when: ansible_os_distribution == 'ubuntu'
 
 # operating System setup - this will be application specific.
 

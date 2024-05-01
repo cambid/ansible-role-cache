@@ -1,79 +1,79 @@
 ---
 
-- name: "check that the file cache exists"
-  stat:
+- name: "Check that the file cache exists"
+  ansible.builtin.stat:
     path: /usr/bin/cache
   register: stat_result
 
-- name: "only execute tasks if cache is installed"
+- name: "Only execute tasks if cache is installed"
+  when: stat_result.stat.exists
   block:
-    - name: "get installed version of cache"
-      command: ccontrol qlist
+    - name: "Get installed version of cache"
+      ansible.builtin.command: ccontrol qlist
       register: qlist
       changed_when: False
 
-    - name: "set fact for version of cache"
-      set_fact:
+    - name: "Set fact for version of cache"
+      ansible.builtin.set_fact:
         installed_version: "{{ qlist.stdout.split('^')[2] }}"
       when: qlist.stdout
 
-    - name: "compare installed version and requested version of cache"
-      meta: end_host
+    - name: "Compare installed version and requested version of cache"
+      ansible.builtin.meta: end_host
       when: installed_version == hs_distribution_version
-  when: stat_result.stat.exists
 
-- name: "check that the file iris exists"
-  stat:
+- name: "Check that the file iris exists"
+  ansible.builtin.stat:
     path: /usr/bin/iris
   register: stat_result
 
-- name: "only execute tasks if iris is installed"
+- name: "Only execute tasks if iris is installed"
+  when: stat_result.stat.exists
   block:
-    - name: "get installed version of iris"
-      command: iris qlist
+    - name: "Get installed version of iris"
+      ansible.builtin.command: iris qlist
       register: qlist
       changed_when: False
 
-    - name: "set fact for version of iris"
-      set_fact:
+    - name: "Set fact for version of iris"
+      ansible.builtin.set_fact:
         installed_version: "{{ qlist.stdout.split('^')[2] }}"
       when: qlist.stdout
 
-    - name: "compare installed version and requested version of cache"
-      meta: end_host
+    - name: "Compare installed version and requested version of cache"
+      ansible.builtin.meta: end_host
       when: installed_version == hs_distribution_version
-  when: stat_result.stat.exists
 
-- name: "include os-specific variables"
-  include_vars: os-{{ ansible_os_family }}.yml
+- name: "Include os-specific variables"
+  ansible.builtin.include_vars: os-{{ ansible_os_family }}.yml
   when: ansible_os_family == 'RedHat'
 
-- name: "include distribution specific variables"
-  include_vars: os-{{ ansible_distribution }}.yml
+- name: "Include distribution specific variables"
+  ansible.builtin.include_vars: os-{{ ansible_distribution }}.yml
   when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'SLES'
 
-- name: "append version if newer IRIS version"
-  set_fact:
-    hs_distribution_name: "{{ hs_distribution_name }}{{ ansible_distribution_version | replace ('.','') }}"
+- name: "Append version if newer IRIS version"
+  ansible.builtin.set_fact:
+    hs_distribution_name: "{{ hs_distribution_name }}{{ ansible_distribution_version | replace('.', '') }}"
   when:
     - hs_distribution_version is version('2021.2.0.649.0', '>=')
     - ansible_distribution == 'Ubuntu'
 
-- name: "append version if newer IRIS version"
-  set_fact:
+- name: "Append version if newer IRIS version"
+  ansible.builtin.set_fact:
     hs_distribution_name: "{{ hs_distribution_name }}{{ ansible_distribution_major_version }}"
   when:
     - hs_distribution_version is version('2021.2.0.649.0', '>=')
     - ansible_os_family == 'RedHat' or ansible_distribution == 'SLES'
 
-- include_tasks: setup-{{ ansible_os_family }}.yml
+- ansible.builtin.include_tasks: setup-{{ ansible_os_family }}.yml
   when:
     - ansible_os_family == 'RedHat'
     - ansible_virtualization_type != 'docker'
 
-- include_tasks: setup-{{ ansible_distribution }}.yml
+- ansible.builtin.include_tasks: setup-{{ ansible_distribution }}.yml
   when:
     - ansible_distribution == 'Ubuntu' or ansible_distribution == 'SLES'
     - ansible_virtualization_type != 'docker'
 
-- include_tasks: configure-cache.yml
+- ansible.builtin.include_tasks: configure-cache.yml

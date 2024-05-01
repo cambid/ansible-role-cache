@@ -1,6 +1,5 @@
 ---
 hs_distribution_name: suse
-when: ansible_os_family == 'Suse'
 
 # operating System setup - this will be application specific.
 

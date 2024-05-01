@@ -1,15 +1,17 @@
 ---
-- name: restart Cache
-  command: ccontrol stop "{{ ISC_PACKAGE_INSTANCENAME }}" restart quietly
+- name: Restart Cache
+  ansible.builtin.command: ccontrol stop "{{ ISC_PACKAGE_INSTANCENAME }}" restart quietly
   listen: "restart database"
   when: hs_distribution_file is not search("IRIS")
+  changed_when: true
 
-- name: restart IRIS
-  command: iris stop "{{ ISC_PACKAGE_INSTANCENAME }}" restart quietly
+- name: Restart IRIS
+  ansible.builtin.command: iris stop "{{ ISC_PACKAGE_INSTANCENAME }}" restart quietly
   listen: "restart database"
   when: hs_distribution_file is search("IRIS")
+  changed_when: true
 
-- name: restart apache2
-  service:
+- name: Restart apache2
+  ansible.builtin.service:
     name: apache2
     state: restarted

@@ -1,48 +1,46 @@
 ---
-### Red Hat Caché specific OS config
+### Red Hat specific OS config
 
 # Set /etc/sysctl.conf
-
-- name: "set vm.swappiness"
-  sysctl:
+- name: "Set vm.swappiness"
+  ansible.posix.sysctl:
     name: vm.swappiness
     value: "{{ os_swappiness }}"
     state: present
 
-- name: "set vm.dirty_background_ratio"
-  sysctl:
+- name: "Set vm.dirty_background_ratio"
+  ansible.posix.sysctl:
     name: vm.dirty_background_ratio
     value: "{{ os_dirty_background_ratio }}"
     state: present
 
-- name: "set vm.dirty_ratio"
-  sysctl:
+- name: "Set vm.dirty_ratio"
+  ansible.posix.sysctl:
     name: vm.dirty_ratio
     value: "{{ os_dirty_ratio }}"
     state: present
 
-# This is an example only of using calculations
-- debug:
-    msg: "Memory in GB {{ ansible_memtotal_mb/1024 }}"
-- debug:
-    msg: "Number of Huge Pages {{ (((hs_percent_shared_memory/100) * ansible_memtotal_mb)/2)|round|int }}"
+- ansible.builtin.debug:
+    msg: "Memory in GB {{ ansible_memtotal_mb / 1024 }}"
+- ansible.builtin.debug:
+    msg: "Number of Huge Pages {{ (((hs_percent_shared_memory / 100) * ansible_memtotal_mb) / 2) | round | int }}"
 
 # Huge pages are 2MB on RH Intel
 # Huge pages must be greater than total shared memory (routine + global buffers + GMHEAP + Other)
 
-- name: "set vm.nr_hugepages"
-  sysctl:
+- name: "Set vm.nr_hugepages"
+  ansible.posix.sysctl:
     name: vm.nr_hugepages
-    value: "{{ (((hs_percent_shared_memory/100) * ansible_memtotal_mb)/2)|round|int  }}"
+    value: "{{ (((hs_percent_shared_memory / 100) * ansible_memtotal_mb) / 2) | round | int }}"
     state: present
     reload: yes
 
 
 # shmmax can be as big as we want - there is no penalty, make same size as memory
-- name: "set kernel.shmmax"
-  sysctl:
+- name: "Set kernel.shmmax"
+  ansible.posix.sysctl:
     name: kernel.shmmax
-    value: "{{ ansible_memtotal_mb * 1024 *1024 }}"
+    value: "{{ ansible_memtotal_mb * 1024 * 1024 }}"
     state: present
     reload: yes
     ignoreerrors: yes

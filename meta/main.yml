@@ -7,24 +7,24 @@ galaxy_info:
 
   license: GPLv3
 
-  min_ansible_version: 1.2
+  min_ansible_version: '1.2'
 
   platforms:
     - name: SLES
       versions:
-        - 11
-        - 11SP1
-        - 11SP2
-        - 11SP3
-        - 11SP4
-        - 12
-        - 12SP1
-        - 15
+        - '11'
+        - '11SP1'
+        - '11SP2'
+        - '11SP3'
+        - '11SP4'
+        - '12'
+        - '12SP1'
+        - '15'
     - name: EL
       versions:
-        - 7
-        - 8
-        - 9
+        - '7'
+        - '8'
+        - '9'
     - name: Ubuntu
       versions:
         - bionic

@@ -1,7 +1,6 @@
 ---
 
 hs_distribution_name: rh
-when: ansible_os_family == 'RedHat'
 
 # operating System setup - this will be application specific.
 
