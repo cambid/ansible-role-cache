@@ -2,9 +2,15 @@
 - name: prepare
   hosts: all
   become: True
-  gather_facts: False
+  gather_facts: True
   tasks:
-    - name: Install packages
+    - name: Install packages for non-SUSE
       package:
         name: openssl
         state: present
+      when: ansible_os_family != 'Suse'
+    - name: Install packages for SUSE
+      package:
+        name: openssl-1_1
+        state: present
+      when: ansible_os_family == 'Suse'

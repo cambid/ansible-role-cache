@@ -12,15 +12,28 @@ platforms:
   - name: rhel-8
     box: generic/rhel8
     memory: 2048
+    instance_raw_config_args:
+      - 'vbguest.auto_update= false'
   - name: rhel-9
     box: generic/rhel9
     memory: 2048
+    instance_raw_config_args:
+      - 'vbguest.auto_update= false'
   - name: ubuntu-focal
     box: ubuntu/focal64
     memory: 2048
+    instance_raw_config_args:
+      - 'vbguest.auto_update= false'
   - name: ubuntu-jammy
     box: ubuntu/jammy64
     memory: 2048
+    instance_raw_config_args:
+      - 'vbguest.auto_update= false'
+  - name: sles15.3
+    box: wandisco/sles15.3-64
+    instance_raw_config_args:
+      - 'vbguest.auto_update= false'
+      - 'vm.synced_folder ".", "/vagrant", disabled: true'
 provisioner:
   name: ansible
   options:
