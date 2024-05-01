@@ -1,0 +1,27 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: vagrant
+  provision: yes
+# lint: |
+#    set -e
+#    yamllint .
+#    ansible-lint
+platforms:
+  - name: rhel-8
+    box: generic/rhel8
+    memory: 2048
+  - name: rhel-9
+    box: generic/rhel9
+    memory: 2048
+  - name: ubuntu-focal
+    box: ubuntu/focal64
+    memory: 2048
+  - name: ubuntu-jammy
+    box: ubuntu/jammy64
+    memory: 2048
+provisioner:
+  name: ansible
+  options:
+    become: True

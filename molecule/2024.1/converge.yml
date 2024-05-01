@@ -1,0 +1,22 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: True
+  roles:
+    - role: cambid.intersystems_cache
+  vars:
+    - hs_distribution_version: 2024.1.0.262.0
+    - hs_distribution_file: "IRIS-{{ hs_distribution_version }}-lnx{{ hs_distribution_name }}x64"
+    - hs_parameterfile_name: parameters_iris202120.isc
+    - common_path_to_distribution_files_Cache: "{{ common_path_to_distribution_files }}/iris"
+    - cache_key_file: iris.key
+    - hs_cache_control: iris
+    - hs_cache_usr: root
+    - hs_cache_usr_sys: root
+    - hs_cache_group: root
+    - ISC_PACKAGE_UNICODE: Y
+    - ISC_BINARY_TYPE: unicode
+    - SECURITY_LEVEL: None
+    - ISC_PACKAGE_INSTANCENAME: IRIS
+    - ISC_PACKAGE_INSTALLDIR: /usr/irissys
+    - ISC_PYTHON: Y
