@@ -4,10 +4,6 @@ dependency:
 driver:
   name: vagrant
   provision: yes
-# lint: |
-#    set -e
-#    yamllint .
-#    ansible-lint
 platforms:
   - name: rhel-8
     box: generic/rhel8
