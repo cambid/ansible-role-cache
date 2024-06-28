@@ -27,7 +27,7 @@
 - name: Create full Caché install temp directory
   ansible.builtin.file:
     path: "{{ common_install_base_path }}/{{ hs_install_unpack_path }}"
-    mode: 0777
+    mode: '0777'
     state: directory
 
 - name: Unarchive install file
@@ -35,21 +35,21 @@
     src: "{{ common_path_to_distribution_files_Cache }}/{{ hs_distribution_file }}.tar.gz"
     dest: "{{ common_install_base_path }}/{{ hs_install_unpack_path }}"
     copy: yes
-    mode: 0777
+    mode: '0777'
     creates: "{{ common_install_base_path }}/{{ hs_install_unpack_path }}/{{ hs_distribution_file }}/cinstall"
 
 - name: Create hs install directory
   ansible.builtin.file:
     path: "{{ ISC_PACKAGE_INSTALLDIR }}"
     state: directory
-    mode: 0666
+    mode: '0666'
     owner: "{{ hs_cache_usr_sys }}"
 
 - name: Process parameters file
   ansible.builtin.template:
     src: "{{ hs_parameterfile_name }}"
     dest: "{{ common_install_base_path }}"
-    mode: 0666
+    mode: '0666'
     owner: "{{ hs_cache_usr_sys }}"
   tags: template
 
@@ -72,7 +72,7 @@
   ansible.builtin.copy:
     src: "{{ common_path_to_distribution_files_Cache }}/{{ cache_key_file }}"
     dest: "{{ ISC_PACKAGE_INSTALLDIR }}/mgr"
-    mode: 0666
+    mode: '0666'
     owner: "{{ hs_cache_usr_sys }}"
   notify: "restart database"
   tags: copy,license
@@ -98,7 +98,7 @@
   ansible.builtin.copy:
     src: "{{ path_to_tmp_files }}/csp.conf"
     dest: /etc/apache2/conf.d/
-    mode: 0644
+    mode: '0644'
     owner: root
     group: root
   when: cspconf.stat.exists
@@ -117,7 +117,7 @@
   ansible.builtin.copy:
     src: "{{ path_to_tmp_files }}/CSP.ini"
     dest: "{{ ISC_CSP_GATEWAY_DIR }}/bin"
-    mode: 0660
+    mode: '0660'
     owner: root
     group: www
   when: cspini.stat.exists
